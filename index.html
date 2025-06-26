@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rumah Kalkulus Warih&friends</title>
+  <title>Rumah Kalkulus</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   <style>
@@ -61,27 +61,33 @@
       </div>
     </section>
 
-    <section id="kalkulator">
-      <h2>Kalkulator Interaktif</h2>
+<section id="kalkulator">
+      <h2>🧮 Kalkulator Kalkulus Interaktif</h2>
+
       <div class="input-group">
-        <h3>Turunan</h3>
-        <input type="text" id="functionInput" placeholder="Masukkan fungsi f(x)">
-        <button onclick="calculateDerivative()">Hitung Turunan</button>
-        <div id="derivativeResult"></div>
+        <h3>Pilih Operasi</h3>
+        <select id="operationType">
+          <option value="evaluate">Evaluasi (Hitung Biasa)</option>
+          <option value="derivative">Turunan</option>
+          <option value="integral">Integral</option>
+          <option value="limit">Limit</option>
+        </select>
       </div>
+
       <div class="input-group">
-        <h3>Integral</h3>
-        <input type="text" id="integralInput" placeholder="Masukkan fungsi f(x)">
-        <button onclick="calculateIntegral()">Hitung Integral</button>
-        <div id="integralResult"></div>
+        <h3>Bangun Ekspresi</h3>
+        <div id="expressionBuilder"></div>
+        <input type="text" id="builtExpression" placeholder="Ekspresi seperti x^2 + 3x - 5">
       </div>
-      <div class="input-group">
-        <h3>Limit</h3>
-        <input type="text" id="limitFunctionInput" placeholder="Masukkan fungsi f(x)">
-        <input type="text" id="limitValueInput" placeholder="Masukkan nilai x">
-        <button onclick="calculateLimit()">Hitung Limit</button>
-        <div id="limitResult"></div>
+
+      <div class="input-group" id="limitInputGroup" style="display: none;">
+        <input type="number" id="limitValue" placeholder="Nilai x mendekati... (contoh: 1)">
       </div>
+
+      <button onclick="runCalculation()">Jalankan</button>
+      <div id="calcResult" style="margin-top: 15px;"></div>
+
+      <p><strong>Contoh:</strong> <em>x^2 + 3*x - 5</em></p>
     </section>
 
     <section id="practice">
@@ -110,44 +116,73 @@
     </section>
   </main>
 
-    <script>
-    function calculateDerivative() {
-      const input = document.getElementById('functionInput').value;
+<script>
+    function buildExpressionButtons() {
+      const container = document.getElementById("expressionBuilder");
+      const buttons = ['x', '^', '+', '-', '*', '/', '(', ')', '1','2','3','4','5','6','7','8','9','0'];
+      buttons.forEach(label => {
+        const btn = document.createElement("button");
+        btn.textContent = label;
+        btn.onclick = () => {
+          document.getElementById("builtExpression").value += label;
+        };
+        container.appendChild(btn);
+      });
+      const clr = document.createElement("button");
+      clr.textContent = "Hapus";
+      clr.onclick = () => document.getElementById("builtExpression").value = "";
+      container.appendChild(clr);
+    }
+
+    document.getElementById("builtExpression").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") runCalculation();
+    });
+
+    function runCalculation() {
+      const expr = document.getElementById("builtExpression").value;
+      const type = document.getElementById("operationType").value;
+      const output = document.getElementById("calcResult");
+
       try {
-        const result = math.derivative(input, 'x').toString();
-        document.getElementById('derivativeResult').innerHTML = `Turunan dari f(x): <strong>${result}</strong>`;
+        let result, steps = "";
+        switch (type) {
+          case "evaluate":
+            result = math.evaluate(expr);
+            steps = `Evaluasi langsung dari ekspresi: \( ${expr} \)`;
+            break;
+          case "derivative":
+            result = math.derivative(expr, 'x').toString();
+            steps = `Gunakan aturan turunan pada \( f(x) = ${expr} \), hasilnya: \( f'(x) = ${result} \)`;
+            break;
+          case "integral":
+            result = math.integral(expr, 'x').toString();
+            steps = `Gunakan aturan integral pada \( f(x) = ${expr} \), hasil: \( \int f(x)dx = ${result} + C \)`;
+            break;
+          case "limit":
+            const x = parseFloat(document.getElementById("limitValue").value);
+            const compiled = math.parse(expr).compile();
+            const left = compiled.evaluate({ x: x - 0.0001 });
+            const right = compiled.evaluate({ x: x + 0.0001 });
+            const avg = ((left + right) / 2).toFixed(5);
+            result = avg;
+            steps = `Evaluasi limit kiri dan kanan dari \( f(x) = ${expr} \) saat \( x \to ${x} \): kiri = ${left.toFixed(5)}, kanan = ${right.toFixed(5)}. Rata-rata: ${avg}`;
+            break;
+        }
+        output.innerHTML = `<p><strong>Soal:</strong> ${expr}</p><p><strong>Hasil:</strong> ${result}</p><p><strong>Langkah Pengerjaan:</strong><br>${steps}</p>`;
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-      } catch {
-        document.getElementById('derivativeResult').innerText = "Error pada input.";
+      } catch (e) {
+        output.innerHTML = "❌ Ekspresi tidak valid atau terjadi kesalahan.";
       }
     }
 
-    function calculateIntegral() {
-      const input = document.getElementById('integralInput').value;
-      try {
-        const result = math.integral(input, 'x').toString();
-        document.getElementById('integralResult').innerHTML = `Integral dari f(x): <strong>${result}</strong> + C`;
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-      } catch {
-        document.getElementById('integralResult').innerText = "Error pada input.";
-      }
-    }
+    document.getElementById("operationType").addEventListener("change", () => {
+      const type = document.getElementById("operationType").value;
+      const limitInput = document.getElementById("limitInputGroup");
+      limitInput.style.display = (type === "limit") ? "block" : "none";
+    });
 
-    function calculateLimit() {
-      const expr = document.getElementById('limitFunctionInput').value;
-      const x = parseFloat(document.getElementById('limitValueInput').value);
-      try {
-        const compiled = math.parse(expr).compile();
-        const left = compiled.evaluate({ x: x - 0.00001 });
-        const right = compiled.evaluate({ x: x + 0.00001 });
-        const avg = ((left + right) / 2).toFixed(5);
-        document.getElementById('limitResult').innerHTML = `Limit saat x → ${x}: <strong>${avg}</strong>`;
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-      } catch {
-        document.getElementById('limitResult').innerText = "Input tidak valid.";
-      }
-    }
-
+    buildExpressionButtons();
+    
     const quizBank = [
       {
         topic: "turunan",
