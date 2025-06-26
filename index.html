@@ -1,4 +1,117 @@
-<script>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rumah Kalkulus</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background-color: #fff0f5; color: #880e4f; margin: 0; }
+    header { background-color: #ffb6c1; padding: 20px; text-align: center; color: white; }
+    nav { background-color: #ffe6ef; padding: 15px 20px; display: flex; justify-content: center; gap: 20px; }
+    nav a { color: #d63384; text-decoration: none; font-weight: bold; }
+    main { max-width: 1200px; margin: 20px auto; background-color: #ffffff; padding: 30px; border-radius: 15px; }
+    section { margin-bottom: 40px; padding: 20px; border-radius: 10px; background-color: #ffebf0; }
+    h2, h3 { color: #d63384; }
+    .bab { border-left: 4px solid #ff69b4; padding-left: 10px; margin-bottom: 15px; }
+    button { background-color: #ff69b4; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+    .input-group input { padding: 10px; width: 100%; font-size: 16px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px; }
+    .practice-problems { background-color: #f0f4f8; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+    .answer { display: none; margin-top: 10px; font-weight: bold; }
+    .options { margin-top: 10px; }
+    .option { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Selamat Datang di Rumah Kalkulus</h1>
+    <p>Belajar kalkulus dengan cara menyenangkan dan interaktif!</p>
+  </header>
+
+  <nav>
+    <a href="#materi">Materi</a>
+    <a href="#kalkulator">Kalkulator</a>
+    <a href="#practice">Latihan</a>
+    <a href="#referensi">Referensi</a>
+  </nav>
+
+  <main>
+    <section id="materi">
+      <h2>Materi Dasar Kalkulus</h2>
+      <div class="bab">
+        <h3>Bab 1: Pengantar</h3>
+        <p>Kalkulus merupakan cabang matematika yang mempelajari perubahan dan gerakan. Terdiri dari dua konsep utama yaitu turunan (differential) dan integral (integral calculus). Turunan digunakan untuk menghitung laju perubahan, sedangkan integral digunakan untuk menghitung akumulasi atau luas di bawah kurva. Konsep ini sangat berguna dalam ilmu fisika, ekonomi, teknik, dan biologi.</p>
+      </div>
+      <div class="bab">
+        <h3>Bab 2: Fungsi dan Grafik</h3>
+        <p>Fungsi adalah relasi antara satu variabel dengan variabel lainnya. Grafik fungsi memvisualisasikan hubungan tersebut dan membantu dalam memahami sifat-sifat fungsi seperti kenaikan, penurunan, maksimum, minimum, dan titik belok. Jenis fungsi yang umum dibahas meliputi fungsi linear, kuadrat, eksponensial, logaritma, dan trigonometri.</p>
+      </div>
+      <div class="bab">
+        <h3>Bab 3: Limit</h3>
+        <p>Limit adalah konsep fundamental dalam kalkulus. Limit mengukur nilai yang didekati oleh fungsi saat variabel mendekati nilai tertentu. Limit digunakan dalam definisi turunan dan integral. Pemahaman limit memungkinkan kita untuk menangani fungsi yang tampak tidak terdefinisi secara langsung, serta mengevaluasi perilaku fungsi pada titik-titik kritis.</p>
+      </div>
+      <div class="bab">
+        <h3>Bab 4: Turunan</h3>
+        <p>Turunan mengukur laju perubahan dari suatu fungsi terhadap variabelnya. Didefinisikan sebagai limit dari perbandingan perubahan fungsi terhadap perubahan variabel. Turunan digunakan untuk menganalisis kecepatan, percepatan, titik maksimum dan minimum, serta kemiringan kurva. Aturan penting dalam turunan meliputi aturan rantai, aturan hasil kali, dan aturan hasil bagi.</p>
+      </div>
+      <div class="bab">
+        <h3>Bab 5: Integral</h3>
+        <p>Integral adalah kebalikan dari turunan dan digunakan untuk menghitung luas di bawah kurva fungsi. Integral memiliki dua jenis yaitu tak tentu (tanpa batas) dan tentu (dengan batas). Integral tentu digunakan untuk menghitung luas dan volume. Teknik integrasi seperti substitusi dan parsial sangat penting untuk menyelesaikan integral yang kompleks.</p>
+      </div>
+    </section>
+
+    <section id="kalkulator">
+      <h2>Kalkulator Interaktif</h2>
+      <div class="input-group">
+        <h3>Turunan</h3>
+        <input type="text" id="functionInput" placeholder="Masukkan fungsi f(x)">
+        <button onclick="calculateDerivative()">Hitung Turunan</button>
+        <div id="derivativeResult"></div>
+      </div>
+      <div class="input-group">
+        <h3>Integral</h3>
+        <input type="text" id="integralInput" placeholder="Masukkan fungsi f(x)">
+        <button onclick="calculateIntegral()">Hitung Integral</button>
+        <div id="integralResult"></div>
+      </div>
+      <div class="input-group">
+        <h3>Limit</h3>
+        <input type="text" id="limitFunctionInput" placeholder="Masukkan fungsi f(x)">
+        <input type="text" id="limitValueInput" placeholder="Masukkan nilai x">
+        <button onclick="calculateLimit()">Hitung Limit</button>
+        <div id="limitResult"></div>
+      </div>
+    </section>
+
+    <section id="practice">
+      <h2>Latihan Soal Acak</h2>
+      <label for="topicSelect">Pilih topik:</label>
+      <select id="topicSelect">
+        <option value="semua">Semua</option>
+        <option value="turunan">Turunan</option>
+        <option value="integral">Integral</option>
+        <option value="limit">Limit</option>
+      </select>
+      <button onclick="generateRandomQuestion()">Tampilkan Soal Acak</button>
+      <div class="practice-problems">
+        <p id="randomQuestion">Klik tombol di atas untuk memulai!</p>
+        <div class="options" id="randomOptions"></div>
+        <p id="randomResult" class="answer"></p>
+      </div>
+    </section>
+
+    <section id="referensi">
+      <h2>Referensi Tambahan</h2>
+      <ul>
+        <li><a href="https://www.khanacademy.org/math/calculus-1" target="_blank">Khan Academy - Calculus 1</a></li>
+        <li><a href="https://www.youtube.com/results?search_query=kalkulus" target="_blank">YouTube: Pencarian Video Kalkulus</a></li>
+      </ul>
+    </section>
+  </main>
+
+    // kalkulator dan latihan tetap
+    <script>
     function calculateDerivative() {
       const input = document.getElementById('functionInput').value;
       try {
@@ -97,3 +210,6 @@
       optDiv.appendChild(btn);
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
+  </script>
+</body>
+</html>
