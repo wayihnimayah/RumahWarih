@@ -69,6 +69,21 @@
       border: none;
       border-radius: 10px;
     }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffb6c1;
+      color: white;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -92,32 +107,44 @@
       <div class="bab">
         <h3>Bab 1: Pengantar Kalkulus</h3>
         <p>Apa itu kalkulus, sejarah, dan kegunaannya dalam kehidupan nyata.</p>
-        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+        <button onclick="alert('Contoh Pengantar Kalkulus')">Lihat Contoh</button>
+        <button onclick="alert('Latihan Soal Bab 1')">Latihan Soal</button>
+        <button onclick="alert('Coba Sendiri Bab 1')">Coba Sendiri</button>
       </div>
       <div class="bab">
         <h3>Bab 2: Fungsi dan Grafik</h3>
         <p>Penjelasan fungsi, domain, range, dan visualisasi grafik.</p>
-        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+        <button onclick="alert('Contoh Fungsi dan Grafik')">Lihat Contoh</button>
+        <button onclick="alert('Latihan Soal Bab 2')">Latihan Soal</button>
+        <button onclick="alert('Coba Sendiri Bab 2')">Coba Sendiri</button>
       </div>
       <div class="bab">
         <h3>Bab 3: Limit</h3>
         <p>Konsep limit, pendekatan, dan animasi visual.</p>
-        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+        <button onclick="alert('Contoh Limit')">Lihat Contoh</button>
+        <button onclick="alert('Latihan Soal Bab 3')">Latihan Soal</button>
+        <button onclick="alert('Coba Sendiri Bab 3')">Coba Sendiri</button>
       </div>
       <div class="bab">
         <h3>Bab 4: Turunan</h3>
         <p>Aturan turunan dasar, contoh interaktif, dan aplikasinya.</p>
-        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+        <button onclick="alert('Contoh Turunan')">Lihat Contoh</button>
+        <button onclick="alert('Latihan Soal Bab 4')">Latihan Soal</button>
+        <button onclick="alert('Coba Sendiri Bab 4')">Coba Sendiri</button>
       </div>
       <div class="bab">
         <h3>Bab 5: Integral</h3>
         <p>Integral tentu & tak tentu, konsep luas, dan soal latihan.</p>
-        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+        <button onclick="alert('Contoh Integral')">Lihat Contoh</button>
+        <button onclick="alert('Latihan Soal Bab 5')">Latihan Soal</button>
+        <button onclick="alert('Coba Sendiri Bab 5')">Coba Sendiri</button>
       </div>
       <div class="bab">
         <h3>Bab 6: Aplikasi Kalkulus</h3>
         <p>Menghitung jarak, kecepatan, optimasi, grafik ekonomi, dll.</p>
-        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+        <button onclick="alert('Contoh Aplikasi Kalkulus')">Lihat Contoh</button>
+        <button onclick="alert('Latihan Soal Bab 6')">Latihan Soal</button>
+        <button onclick="alert('Coba Sendiri Bab 6')">Coba Sendiri</button>
       </div>
     </section>
 
@@ -161,5 +188,9 @@
       </ul>
     </section>
   </main>
+
+  <footer>
+    <p>&copy; 2023 Rumah Kalkulus. Semua hak dilindungi.</p>
+  </footer>
 </body>
 </html>
