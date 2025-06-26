@@ -1,185 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rumah Kalkulus</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
-  <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fff0f5;
-      color: #880e4f;
-      margin: 0;
-    }
-    body.dark-mode { background-color: #121212; color: #fff; }
-    header {
-      background-color: #ffb6c1;
-      padding: 20px;
-      text-align: center;
-      color: white;
-    }
-    header.dark-mode { background-color: #444; }
-    nav {
-      background-color: #ffe6ef;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-    nav a {
-      color: #d63384;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover { color: #ff69b4; }
-    main {
-      max-width: 1200px;
-      margin: 20px auto;
-      background-color: #ffffff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
-    }
-    main.dark-mode { background-color: #333; }
-    section {
-      margin-bottom: 40px;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: #ffebf0;
-    }
-    section.dark-mode { background-color: #444; }
-    h2, h3 {
-      color: #d63384;
-    }
-    body.dark-mode h2, body.dark-mode h3 {
-      color: #ff69b4;
-    }
-    .bab {
-      border-left: 4px solid #ff69b4;
-      padding-left: 10px;
-      margin-bottom: 15px;
-    }
-    button {
-      background-color: #ff69b4;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      margin: 5px 5px 10px 0;
-      cursor: pointer;
-    }
-    button:hover { background-color: #d63384; }
-    .dark-mode-toggle {
-      background-color: #ff69b4;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    .dark-mode-toggle:hover { background-color: #d63384; }
-    .input-group {
-      margin-bottom: 20px;
-    }
-    .input-group input {
-      padding: 10px;
-      width: 100%;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      margin-bottom: 10px;
-    }
-    .practice-problems {
-      background-color: #f0f4f8;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .answer {
-      display: none;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    .options { margin-top: 10px; }
-    .option { margin: 5px 0; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Selamat Datang di Rumah Kalkulus</h1>
-    <p>Belajar kalkulus dengan cara menyenangkan dan interaktif!</p>
-  </header>
-
-  <nav>
-    <a href="#materi">Materi</a>
-    <a href="#kalkulator">Kalkulator</a>
-    <a href="#practice">Latihan</a>
-    <a href="#resources">Referensi</a>
-  </nav>
-
-  <main>
-    <section id="materi">
-      <h2>📘 Materi Dasar Kalkulus</h2>
-      <div class="bab"><h3>Bab 1: Pengantar</h3><p>Kalkulus mempelajari perubahan: Turunan dan Integral.</p></div>
-      <div class="bab"><h3>Bab 2: Fungsi dan Grafik</h3><p>Hubungan antara x dan y dalam bentuk visual.</p></div>
-      <div class="bab"><h3>Bab 3: Limit</h3><p>Nilai fungsi saat mendekati titik tertentu.</p></div>
-      <div class="bab"><h3>Bab 4: Turunan</h3><p>Laju perubahan sesaat.</p></div>
-      <div class="bab"><h3>Bab 5: Integral</h3><p>Luas di bawah kurva dan akumulasi.</p></div>
-    </section>
-
-    <section id="kalkulator">
-      <h2>🧮 Kalkulator Interaktif</h2>
-      <div class="input-group">
-        <h3>Turunan</h3>
-        <input type="text" id="functionInput" placeholder="Masukkan fungsi f(x)">
-        <button onclick="calculateDerivative()">Hitung Turunan</button>
-        <div id="derivativeResult"></div>
-      </div>
-      <div class="input-group">
-        <h3>Integral</h3>
-        <input type="text" id="integralInput" placeholder="Masukkan fungsi f(x)">
-        <button onclick="calculateIntegral()">Hitung Integral</button>
-        <div id="integralResult"></div>
-      </div>
-      <div class="input-group">
-        <h3>Limit</h3>
-        <input type="text" id="limitFunctionInput" placeholder="Masukkan fungsi f(x)">
-        <input type="text" id="limitValueInput" placeholder="Masukkan nilai x">
-        <button onclick="calculateLimit()">Hitung Limit</button>
-        <div id="limitResult"></div>
-      </div>
-    </section>
-
-    <section id="practice">
-      <h2>📋 Latihan Soal</h2>
-      <div class="practice-problems">
-        <h3>Soal 1:</h3>
-        <p>Hitung turunan dari \\( f(x) = 3x^2 + 2x + 1 \\).</p>
-        <div class="options">
-          <div class="option"><input type="radio" name="question1" value="a"> A) \\( 6x + 2 \\)</div>
-          <div class="option"><input type="radio" name="question1" value="b"> B) \\( 3x + 2 \\)</div>
-        </div>
-        <button onclick="checkAnswer('question1','a')">Cek Jawaban</button>
-        <p id="result1" class="answer"></p>
-      </div>
-    </section>
-
-    <section id="resources">
-      <h2>📚 Referensi</h2>
-      <ul>
-        <li><a href="https://www.khanacademy.org/math/calculus-1" target="_blank">Khan Academy</a></li>
-        <li><a href="https://www.youtube.com/results?search_query=kalkulus" target="_blank">YouTube</a></li>
-      </ul>
-    </section>
-
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-  </main>
-
-  <script>
+<script>
     function calculateDerivative() {
       const input = document.getElementById('functionInput').value;
       try {
@@ -217,20 +36,64 @@
       }
     }
 
-    function checkAnswer(name, correct) {
-      const selected = document.querySelector(`input[name="${name}"]:checked`);
-      const result = document.getElementById(`result1`);
-      if (!selected) return;
-      result.innerText = selected.value === correct ? "✅ Benar!" : "❌ Salah.";
-      result.style.display = "block";
-    }
+    const quizBank = [
+      {
+        topic: "turunan",
+        question: "Turunan dari \\( f(x) = x^2 \\) adalah ...",
+        options: [
+          { label: "A", text: "\\( 2x \\)", correct: true },
+          { label: "B", text: "\\( x^2 \\)", correct: false }
+        ],
+        explanation: "Turunan dari \\( x^n \\) adalah \\( nx^{n-1} \\), jadi \\( f'(x) = 2x \\)."
+      },
+      {
+        topic: "integral",
+        question: "Integral dari \\( f(x) = 3x^2 \\) adalah ...",
+        options: [
+          { label: "A", text: "\\( x^3 + C \\)", correct: true },
+          { label: "B", text: "\\( 3x + C \\)", correct: false }
+        ],
+        explanation: "Integral dari \\( x^n \\) adalah \\( \\frac{x^{n+1}}{n+1} + C \\), jadi hasilnya \\( x^3 + C \\)."
+      },
+      {
+        topic: "limit",
+        question: "Limit dari \\( \\frac{x^2 - 1}{x - 1} \\) saat \\( x \\to 1 \\) adalah ...",
+        options: [
+          { label: "A", text: "2", correct: true },
+          { label: "B", text: "Tak terdefinisi", correct: false }
+        ],
+        explanation: "Faktorkan: \\( \\frac{(x - 1)(x + 1)}{x - 1} \\), coret \\( x - 1 \\), sisa \\( x + 1 = 2 \\)."
+      }
+    ];
 
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-      document.querySelector("header").classList.toggle("dark-mode");
-      document.querySelector("main").classList.toggle("dark-mode");
-      document.querySelectorAll("section").forEach(sec => sec.classList.toggle("dark-mode"));
+    function generateRandomQuestion() {
+      const topic = document.getElementById("topicSelect").value;
+      const filtered = topic === "semua" ? quizBank : quizBank.filter(q => q.topic === topic);
+      if (filtered.length === 0) return;
+      const quiz = filtered[Math.floor(Math.random() * filtered.length)];
+      document.getElementById("randomQuestion").innerHTML = quiz.question;
+      const optDiv = document.getElementById("randomOptions");
+      optDiv.innerHTML = "";
+      quiz.options.forEach((opt, i) => {
+        optDiv.innerHTML += `<div class="option">
+          <input type="radio" name="randomQ" id="opt${i}" value="${opt.label}">
+          <label for="opt${i}">${opt.label}) ${opt.text}</label>
+        </div>`;
+      });
+      const result = document.getElementById("randomResult");
+      result.innerHTML = "";
+      result.style.display = "none";
+      const btn = document.createElement("button");
+      btn.textContent = "Cek Jawaban";
+      btn.onclick = () => {
+        const selected = document.querySelector('input[name="randomQ"]:checked');
+        const correct = quiz.options.find(opt => opt.correct).label;
+        if (!selected) return;
+        const isCorrect = selected.value === correct;
+        result.innerHTML = `${isCorrect ? "✅ Benar!" : "❌ Salah."}<br><em>Penjelasan:</em> ${quiz.explanation}`;
+        result.style.display = "block";
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      };
+      optDiv.appendChild(btn);
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
-  </script>
-</body>
-</html>'''
