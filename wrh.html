@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rumah Kalkulus</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
+      color: #880e4f;
+      margin: 0;
+    }
+    header {
+      background-color: #ffb6c1;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+    nav {
+      background-color: #ffe6ef;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: #d63384;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      max-width: 1000px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      color: #d63384;
+    }
+    .bab {
+      border-left: 4px solid #ff69b4;
+      padding-left: 10px;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin: 5px 5px 10px 0;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d63384;
+    }
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Selamat Datang di Rumah Kalkulus</h1>
+    <p>Untuk pelajar SMA, kuliah, atau umum</p>
+  </header>
+
+  <nav>
+    <a href="#materi">Materi</a>
+    <a href="#kalkulator">Kalkulator</a>
+    <a href="#latihan">Latihan</a>
+    <a href="#video">Video</a>
+    <a href="#qna">Q&A</a>
+    <a href="#download">Download</a>
+  </nav>
+
+  <main>
+    <section id="materi">
+      <h2>📘 Materi Dasar Kalkulus</h2>
+      <div class="bab">
+        <h3>Bab 1: Pengantar Kalkulus</h3>
+        <p>Apa itu kalkulus, sejarah, dan kegunaannya dalam kehidupan nyata.</p>
+        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+      </div>
+      <div class="bab">
+        <h3>Bab 2: Fungsi dan Grafik</h3>
+        <p>Penjelasan fungsi, domain, range, dan visualisasi grafik.</p>
+        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+      </div>
+      <div class="bab">
+        <h3>Bab 3: Limit</h3>
+        <p>Konsep limit, pendekatan, dan animasi visual.</p>
+        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+      </div>
+      <div class="bab">
+        <h3>Bab 4: Turunan</h3>
+        <p>Aturan turunan dasar, contoh interaktif, dan aplikasinya.</p>
+        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+      </div>
+      <div class="bab">
+        <h3>Bab 5: Integral</h3>
+        <p>Integral tentu & tak tentu, konsep luas, dan soal latihan.</p>
+        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+      </div>
+      <div class="bab">
+        <h3>Bab 6: Aplikasi Kalkulus</h3>
+        <p>Menghitung jarak, kecepatan, optimasi, grafik ekonomi, dll.</p>
+        <button>Lihat Contoh</button><button>Latihan Soal</button><button>Coba Sendiri</button>
+      </div>
+    </section>
+
+    <section id="kalkulator">
+      <h2>🧮 Kalkulator Interaktif</h2>
+      <ul>
+        <li><strong>Kalkulator Turunan:</strong> Masukkan f(x), tampilkan hasil turunan</li>
+        <li><strong>Kalkulator Integral:</strong> Masukkan f(x), tampilkan hasil dan luas</li>
+        <li><strong>Limit Checker:</strong> Masukkan fungsi dan nilai x → hasil otomatis</li>
+      </ul>
+      <p>(Untuk versi lengkap, bisa ditambahkan dengan Math.js/MathJax)</p>
+    </section>
+
+    <section id="latihan">
+      <h2>📋 Latihan Soal Otomatis</h2>
+      <ul>
+        <li>Pilihan ganda lengkap dengan pembahasan</li>
+        <li>Soal drag & drop grafik (opsional)</li>
+        <li>Evaluasi skor + level pemahaman</li>
+      </ul>
+    </section>
+
+    <section id="video">
+      <h2>🎥 Video/Animasi Penjelasan</h2>
+      <p>Contoh video penjelasan kalkulus:</p>
+      <iframe src="https://www.youtube.com/embed/HEZKzD4xqfE" allowfullscreen></iframe>
+    </section>
+
+    <section id="qna">
+      <h2>❓ Tanya Jawab (Q&A)</h2>
+      <p><strong>Pertanyaan:</strong> Apa bedanya turunan dan integral?</p>
+      <p><strong>Jawaban:</strong> Turunan menggambarkan perubahan sesaat (laju), sedangkan integral menggambarkan penjumlahan luas atau total perubahan.</p>
+    </section>
+
+    <section id="download">
+      <h2>📄 Download PDF & Worksheet</h2>
+      <ul>
+        <li>Ringkasan materi per bab</li>
+        <li>Soal latihan printable</li>
+        <li>Jawaban dan pembahasan</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
